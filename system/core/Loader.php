@@ -1005,7 +1005,7 @@ class CI_Loader {
 	 * @return	null
 	 */
 	protected function _ci_init_class($class, $prefix = '', $config = FALSE, $object_name = NULL)
-	{
+	{ 
 		// Is there an associated config file for this class?  Note: these should always be lowercase
 		if ($config === NULL)
 		{
@@ -1041,7 +1041,7 @@ class CI_Loader {
 						include($path .'config/'.ucfirst(strtolower($class)).'.php');
 						break;
 					}
-				}
+				} 
 			}
 		}
 
@@ -1077,8 +1077,8 @@ class CI_Loader {
 		$class = strtolower($class);
 
 		if (is_null($object_name))
-		{
-			$classvar = ( ! isset($this->_ci_varmap[$class])) ? $class : $this->_ci_varmap[$class];
+		{ 
+			$classvar = ( ! isset($this->_ci_varmap[$class])) ? $class : $this->_ci_varmap[$class]; 
 		}
 		else
 		{
@@ -1087,15 +1087,15 @@ class CI_Loader {
 
 		// Save the class name and object name
 		$this->_ci_classes[$class] = $classvar;
-
+    
 		// Instantiate the class
-		$CI =& get_instance();
+		$CI =& get_instance(); 
 		if ($config !== NULL)
 		{
 			$CI->$classvar = new $name($config);
 		}
 		else
-		{
+		{  
 			$CI->$classvar = new $name;
 		}
 	}

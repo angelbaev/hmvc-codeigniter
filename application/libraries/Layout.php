@@ -50,7 +50,9 @@ class CI_Layout {
 			$this->initialize($config);
 		}
 
-//    $this->CI = & get_instance();
+    $this->CI = & get_instance();
+//   print "Test: ".get_class ($this->CI)::TEMPLATE;
+//    print "CONST: ".$this->CI->TEMPLATE."<bR>";
  //   $this->layout_view = 'layout/default.php';  // ???
     
 //    if (isset($this->CI->layout_view)) $this->layout_view = $this->CI->layout_view;
@@ -222,7 +224,6 @@ class CI_Layout {
 	 * @return	void
 	 */
    public function view($view, $data = NULL, $return = FALSE) {
-   print "TPL: ".$this->template."<br>";
      /*
      Render template
      */
@@ -275,7 +276,13 @@ class CI_Layout {
      ';
 
      $this->block_replace = true;
-     return $this->CI->load->view($this->layout_view, $data, $return);
+     /*
+      print "<pre>"; print_r($data); print "</pre>";
+      print "<pre>"; print_r($this->CI); print "</pre>";
+      */
+     $data['layout_view'] = $this->layout_view; 
+     return $this->CI->load->view('theme/'.$this->template.'/template/common/template', $data, $return); 
+    // return $this->CI->load->view($this->layout_view, $data, $return);
      
    }
     

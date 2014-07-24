@@ -1,5 +1,6 @@
-<?php $this->load->view('common/header'); ?>
+<?php $this->load->view('theme/admin/template/common/header'); ?>
 
-<?php $this->load->view($main_content); ?>
+<?php $this->load->view('theme/admin/layouts/'.$layout_view, $content_for_layout); ?>
 
-<?php $this->load->view('common/footer'); ?>
+
+<?php $this->load->view('theme/admin/template/common/footer'); ?>

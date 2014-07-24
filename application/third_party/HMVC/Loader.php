@@ -112,6 +112,33 @@ class HMVC_Loader extends CI_Loader {
     public function library($library = '', $params = NULL, $object_name = NULL) {
         if (is_array($library)) {
             foreach ($library as $class) {
+                $this->library($class, $params, $object_name);
+            }
+            return;
+        }
+        // Detect module
+        if (list($module, $_class) = $this->detect_module($library)) {
+            // Module already loaded
+            if (in_array($module, $this->_ci_modules)) {
+                return parent::library($_class, $params, $object_name);
+            }
+            // Add module
+            $this->add_module($module);
+
+            // Let parent do the heavy work
+            $void = parent::library($class, $params, $object_name);
+            
+            // Remove module
+            $this->remove_module();
+            return $void;        
+        } else { 
+           return parent::library($library, $params, $object_name);
+        }
+        
+      
+    /*
+        if (is_array($library)) {
+            foreach ($library as $class) {
                 $this->library($class, $params);
             }
             return;
@@ -137,6 +164,7 @@ class HMVC_Loader extends CI_Loader {
         } else {
             return parent::library($library, $params, $object_name);
         }
+        */
     }
 
     /**
